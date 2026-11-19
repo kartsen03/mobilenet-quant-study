@@ -1,0 +1,152 @@
+{
+  "env": {
+    "timestamp": "2026-11-19T18:32:08-05:00",
+    "os": "Windows-10-10.0.26300-SP0",
+    "python": "3.11.9",
+    "numpy": "2.4.6",
+    "torch": "2.14.1+cu130",
+    "torch_cuda": "13.0",
+    "cudnn": 92400,
+    "cuda_available": true,
+    "quantized_engines": [
+      "onednn"
+    ],
+    "quantized_engine": "onednn",
+    "torch_threads": 14,
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700H",
+    "logical_cpus": 20,
+    "performance_cpus": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "driver": "592.00",
+      "memory": "6144 MiB"
+    },
+    "power_plan": "Turbo",
+    "git": {
+      "commit": "af46b0c9d00b1736b670ed481fd48c311bbe7bde",
+      "code_dirty": false
+    },
+    "torchvision": "0.29.1+cu130",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.32.0",
+    "onnxscript": "0.7.2",
+    "git_at_write": {
+      "commit": "af46b0c9d00b1736b670ed481fd48c311bbe7bde",
+      "code_dirty": false
+    }
+  },
+  "method": "CPU latency per image (batch 1) for PyTorch and ONNX Runtime models.\n\nMethod:\n- each thread count runs in its own process, pinned to that many performance\n  cores (one logical CPU per P-core, so no SMT sharing and no E-cores);\n- models are timed in interleaved rounds (shuffled order each round) so thermal\n  drift and background noise hit every model equally;\n- each round: 0.5 s warmup, then `runs` individually timed calls;\n- reported: median over all rounds (plus p05/p95 and per-round medians).\n\nUsage: python experiments/latency.py --models fp32_fused ptq --tag stage2\n       ONNX models are named ort:<file stem in checkpoints/>, e.g. ort:fp32",
+  "rounds": 5,
+  "runs_per_round": 100,
+  "batch_size": 1,
+  "by_threads": {
+    "1": {
+      "threads": 1,
+      "pinned_cpus": [
+        0
+      ],
+      "torch_threads": 1,
+      "models": {
+        "fp32": {
+          "median_ms": 8.2798,
+          "p05_ms": 7.379,
+          "p95_ms": 10.9936,
+          "n": 500,
+          "round_medians_ms": [
+            7.9897,
+            8.2378,
+            8.3875,
+            8.5686,
+            8.4928
+          ]
+        },
+        "fp32_fused": {
+          "median_ms": 7.0131,
+          "p05_ms": 6.2476,
+          "p95_ms": 9.3578,
+          "n": 500,
+          "round_medians_ms": [
+            6.6397,
+            7.066,
+            6.9821,
+            7.2272,
+            7.2363
+          ]
+        },
+        "ptq": {
+          "median_ms": 4.6317,
+          "p05_ms": 4.1336,
+          "p95_ms": 7.0006,
+          "n": 500,
+          "round_medians_ms": [
+            4.6178,
+            4.5615,
+            4.7142,
+            4.6318,
+            4.6758
+          ]
+        }
+      }
+    },
+    "6": {
+      "threads": 6,
+      "pinned_cpus": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10
+      ],
+      "torch_threads": 6,
+      "models": {
+        "fp32": {
+          "median_ms": 7.8662,
+          "p05_ms": 6.8423,
+          "p95_ms": 12.9655,
+          "n": 500,
+          "round_medians_ms": [
+            7.8948,
+            7.4582,
+            8.7946,
+            7.5968,
+            7.3617
+          ]
+        },
+        "fp32_fused": {
+          "median_ms": 6.3098,
+          "p05_ms": 5.6116,
+          "p95_ms": 9.8347,
+          "n": 500,
+          "round_medians_ms": [
+            6.2489,
+            5.9782,
+            6.5701,
+            6.2911,
+            6.3418
+          ]
+        },
+        "ptq": {
+          "median_ms": 3.5095,
+          "p05_ms": 3.145,
+          "p95_ms": 5.8676,
+          "n": 500,
+          "round_medians_ms": [
+            3.5596,
+            3.3662,
+            3.5948,
+            3.3394,
+            3.596
+          ]
+        }
+      }
+    }
+  }
+}
