@@ -1,0 +1,10 @@
+# CUDA 13.0 build of PyTorch (works with driver >= 580). For a CPU-only setup use
+# --index-url https://download.pytorch.org/whl/cpu and drop the +cu130 suffixes.
+--extra-index-url https://download.pytorch.org/whl/cu130
+torch==2.14.1+cu130
+torchvision==0.29.1+cu130
+numpy==2.4.6
+onnx==1.23.2
+onnxscript==0.7.2
+onnxruntime==1.32.0
+matplotlib==3.11.2
