@@ -1,0 +1,648 @@
+{
+  "env": {
+    "timestamp": "2026-11-19T18:29:25-05:00",
+    "os": "Windows-10-10.0.26300-SP0",
+    "python": "3.11.9",
+    "numpy": "2.4.6",
+    "torch": "2.14.1+cu130",
+    "torch_cuda": "13.0",
+    "cudnn": 92400,
+    "cuda_available": true,
+    "quantized_engines": [
+      "onednn"
+    ],
+    "quantized_engine": "onednn",
+    "torch_threads": 14,
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700H",
+    "logical_cpus": 20,
+    "performance_cpus": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "driver": "592.00",
+      "memory": "6144 MiB"
+    },
+    "power_plan": "Turbo",
+    "git": {
+      "commit": "b72247b9b763b23b471a6c9dcf8f4e823894caeb",
+      "code_dirty": false
+    },
+    "torchvision": "0.29.1+cu130",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.32.0",
+    "onnxscript": "0.7.2",
+    "git_at_write": {
+      "commit": "b72247b9b763b23b471a6c9dcf8f4e823894caeb",
+      "code_dirty": false
+    }
+  },
+  "config": {
+    "engine": "onednn",
+    "calib_size": 1024,
+    "calib_source": "training split, eval transforms (no augmentation)",
+    "main": "per_channel weights + histogram activations, calib seed 0"
+  },
+  "test_acc": 0.931,
+  "val_acc": 0.9312,
+  "fp32_test_acc": 0.9331,
+  "test_pred_changed_vs_fp32": 73,
+  "size_bytes": 2641755,
+  "fp32_size_bytes": 9170251,
+  "reload_bit_exact": true,
+  "ablation": [
+    {
+      "weights": "per_tensor",
+      "activations": "minmax",
+      "calib_seed": 0,
+      "val_acc": 0.9314,
+      "test_acc": 0.9316,
+      "test_pred_changed_vs_fp32": 102,
+      "prepare_calibrate_convert_s": 3.2
+    },
+    {
+      "weights": "per_tensor",
+      "activations": "minmax",
+      "calib_seed": 1,
+      "val_acc": 0.931,
+      "test_acc": 0.9308,
+      "test_pred_changed_vs_fp32": 84,
+      "prepare_calibrate_convert_s": 3.0
+    },
+    {
+      "weights": "per_tensor",
+      "activations": "minmax",
+      "calib_seed": 2,
+      "val_acc": 0.9286,
+      "test_acc": 0.9307,
+      "test_pred_changed_vs_fp32": 97,
+      "prepare_calibrate_convert_s": 2.8
+    },
+    {
+      "weights": "per_tensor",
+      "activations": "histogram",
+      "calib_seed": 0,
+      "val_acc": 0.9306,
+      "test_acc": 0.9316,
+      "test_pred_changed_vs_fp32": 86,
+      "prepare_calibrate_convert_s": 6.1
+    },
+    {
+      "weights": "per_tensor",
+      "activations": "histogram",
+      "calib_seed": 1,
+      "val_acc": 0.9296,
+      "test_acc": 0.9326,
+      "test_pred_changed_vs_fp32": 72,
+      "prepare_calibrate_convert_s": 6.5
+    },
+    {
+      "weights": "per_tensor",
+      "activations": "histogram",
+      "calib_seed": 2,
+      "val_acc": 0.9314,
+      "test_acc": 0.9319,
+      "test_pred_changed_vs_fp32": 73,
+      "prepare_calibrate_convert_s": 6.4
+    },
+    {
+      "weights": "per_channel",
+      "activations": "minmax",
+      "calib_seed": 0,
+      "val_acc": 0.9308,
+      "test_acc": 0.9313,
+      "test_pred_changed_vs_fp32": 77,
+      "prepare_calibrate_convert_s": 3.0
+    },
+    {
+      "weights": "per_channel",
+      "activations": "minmax",
+      "calib_seed": 1,
+      "val_acc": 0.9302,
+      "test_acc": 0.9314,
+      "test_pred_changed_vs_fp32": 75,
+      "prepare_calibrate_convert_s": 3.1
+    },
+    {
+      "weights": "per_channel",
+      "activations": "minmax",
+      "calib_seed": 2,
+      "val_acc": 0.9306,
+      "test_acc": 0.9318,
+      "test_pred_changed_vs_fp32": 82,
+      "prepare_calibrate_convert_s": 2.9
+    },
+    {
+      "weights": "per_channel",
+      "activations": "histogram",
+      "calib_seed": 0,
+      "val_acc": 0.9312,
+      "test_acc": 0.931,
+      "test_pred_changed_vs_fp32": 73,
+      "prepare_calibrate_convert_s": 6.5
+    },
+    {
+      "weights": "per_channel",
+      "activations": "histogram",
+      "calib_seed": 1,
+      "val_acc": 0.9312,
+      "test_acc": 0.932,
+      "test_pred_changed_vs_fp32": 59,
+      "prepare_calibrate_convert_s": 6.8
+    },
+    {
+      "weights": "per_channel",
+      "activations": "histogram",
+      "calib_seed": 2,
+      "val_acc": 0.9296,
+      "test_acc": 0.9321,
+      "test_pred_changed_vs_fp32": 59,
+      "prepare_calibrate_convert_s": 7.6
+    }
+  ],
+  "weight_stats": [
+    {
+      "layer": "stem",
+      "out_channels": 32,
+      "weights_per_channel": 27,
+      "range_spread_max_over_median": 4.721841335296631,
+      "sqnr_db_per_tensor": 36.11,
+      "sqnr_db_per_channel": 44.27,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.0.dw",
+      "out_channels": 32,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 3.4919281005859375,
+      "sqnr_db_per_tensor": 39.66,
+      "sqnr_db_per_channel": 46.28,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.0.project",
+      "out_channels": 16,
+      "weights_per_channel": 32,
+      "range_spread_max_over_median": 1.7694947719573975,
+      "sqnr_db_per_tensor": 40.71,
+      "sqnr_db_per_channel": 44.21,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.1.expand",
+      "out_channels": 96,
+      "weights_per_channel": 16,
+      "range_spread_max_over_median": 1.6127158403396606,
+      "sqnr_db_per_tensor": 42.53,
+      "sqnr_db_per_channel": 45.93,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.1.dw",
+      "out_channels": 96,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 2.775247812271118,
+      "sqnr_db_per_tensor": 40.36,
+      "sqnr_db_per_channel": 46.54,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.1.project",
+      "out_channels": 24,
+      "weights_per_channel": 96,
+      "range_spread_max_over_median": 1.489129662513733,
+      "sqnr_db_per_tensor": 40.4,
+      "sqnr_db_per_channel": 43.22,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.2.expand",
+      "out_channels": 144,
+      "weights_per_channel": 24,
+      "range_spread_max_over_median": 1.7989459037780762,
+      "sqnr_db_per_tensor": 40.71,
+      "sqnr_db_per_channel": 45.3,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.2.dw",
+      "out_channels": 144,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 2.317950963973999,
+      "sqnr_db_per_tensor": 42.11,
+      "sqnr_db_per_channel": 47.57,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.2.project",
+      "out_channels": 24,
+      "weights_per_channel": 144,
+      "range_spread_max_over_median": 1.6206985712051392,
+      "sqnr_db_per_tensor": 39.7,
+      "sqnr_db_per_channel": 42.96,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.3.expand",
+      "out_channels": 144,
+      "weights_per_channel": 24,
+      "range_spread_max_over_median": 1.8181933164596558,
+      "sqnr_db_per_tensor": 41.04,
+      "sqnr_db_per_channel": 45.42,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.3.dw",
+      "out_channels": 144,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 1.9519155025482178,
+      "sqnr_db_per_tensor": 43.67,
+      "sqnr_db_per_channel": 47.6,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.3.project",
+      "out_channels": 32,
+      "weights_per_channel": 144,
+      "range_spread_max_over_median": 1.6196043491363525,
+      "sqnr_db_per_tensor": 39.06,
+      "sqnr_db_per_channel": 42.46,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.4.expand",
+      "out_channels": 192,
+      "weights_per_channel": 32,
+      "range_spread_max_over_median": 1.6820391416549683,
+      "sqnr_db_per_tensor": 41.45,
+      "sqnr_db_per_channel": 45.24,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.4.dw",
+      "out_channels": 192,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 2.074716567993164,
+      "sqnr_db_per_tensor": 42.1,
+      "sqnr_db_per_channel": 47.11,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.4.project",
+      "out_channels": 32,
+      "weights_per_channel": 192,
+      "range_spread_max_over_median": 1.7838646173477173,
+      "sqnr_db_per_tensor": 39.16,
+      "sqnr_db_per_channel": 42.97,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.5.expand",
+      "out_channels": 192,
+      "weights_per_channel": 32,
+      "range_spread_max_over_median": 1.821290135383606,
+      "sqnr_db_per_tensor": 40.62,
+      "sqnr_db_per_channel": 45.09,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.5.dw",
+      "out_channels": 192,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 1.933278203010559,
+      "sqnr_db_per_tensor": 42.68,
+      "sqnr_db_per_channel": 47.01,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.5.project",
+      "out_channels": 32,
+      "weights_per_channel": 192,
+      "range_spread_max_over_median": 2.0698421001434326,
+      "sqnr_db_per_tensor": 37.72,
+      "sqnr_db_per_channel": 43.03,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.6.expand",
+      "out_channels": 192,
+      "weights_per_channel": 32,
+      "range_spread_max_over_median": 1.8225197792053223,
+      "sqnr_db_per_tensor": 40.42,
+      "sqnr_db_per_channel": 44.94,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.6.dw",
+      "out_channels": 192,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 4.23539924621582,
+      "sqnr_db_per_tensor": 37.71,
+      "sqnr_db_per_channel": 47.96,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.6.project",
+      "out_channels": 64,
+      "weights_per_channel": 192,
+      "range_spread_max_over_median": 1.5222729444503784,
+      "sqnr_db_per_tensor": 39.41,
+      "sqnr_db_per_channel": 42.62,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.7.expand",
+      "out_channels": 384,
+      "weights_per_channel": 64,
+      "range_spread_max_over_median": 1.7660787105560303,
+      "sqnr_db_per_tensor": 40.18,
+      "sqnr_db_per_channel": 44.6,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.7.dw",
+      "out_channels": 384,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 2.3977065086364746,
+      "sqnr_db_per_tensor": 40.79,
+      "sqnr_db_per_channel": 46.79,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.7.project",
+      "out_channels": 64,
+      "weights_per_channel": 384,
+      "range_spread_max_over_median": 1.614403486251831,
+      "sqnr_db_per_tensor": 37.77,
+      "sqnr_db_per_channel": 41.74,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.8.expand",
+      "out_channels": 384,
+      "weights_per_channel": 64,
+      "range_spread_max_over_median": 1.6286293268203735,
+      "sqnr_db_per_tensor": 40.72,
+      "sqnr_db_per_channel": 44.49,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.8.dw",
+      "out_channels": 384,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 2.455899477005005,
+      "sqnr_db_per_tensor": 40.9,
+      "sqnr_db_per_channel": 46.74,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.8.project",
+      "out_channels": 64,
+      "weights_per_channel": 384,
+      "range_spread_max_over_median": 1.4821226596832275,
+      "sqnr_db_per_tensor": 38.75,
+      "sqnr_db_per_channel": 41.88,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.9.expand",
+      "out_channels": 384,
+      "weights_per_channel": 64,
+      "range_spread_max_over_median": 1.7806476354599,
+      "sqnr_db_per_tensor": 39.85,
+      "sqnr_db_per_channel": 44.53,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.9.dw",
+      "out_channels": 384,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 3.371891975402832,
+      "sqnr_db_per_tensor": 38.11,
+      "sqnr_db_per_channel": 46.77,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.9.project",
+      "out_channels": 64,
+      "weights_per_channel": 384,
+      "range_spread_max_over_median": 1.765286922454834,
+      "sqnr_db_per_tensor": 37.07,
+      "sqnr_db_per_channel": 41.35,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.10.expand",
+      "out_channels": 384,
+      "weights_per_channel": 64,
+      "range_spread_max_over_median": 1.4594979286193848,
+      "sqnr_db_per_tensor": 41.53,
+      "sqnr_db_per_channel": 44.52,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.10.dw",
+      "out_channels": 384,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 4.184871673583984,
+      "sqnr_db_per_tensor": 36.61,
+      "sqnr_db_per_channel": 46.81,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.10.project",
+      "out_channels": 96,
+      "weights_per_channel": 384,
+      "range_spread_max_over_median": 1.765446424484253,
+      "sqnr_db_per_tensor": 37.62,
+      "sqnr_db_per_channel": 42.16,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.11.expand",
+      "out_channels": 576,
+      "weights_per_channel": 96,
+      "range_spread_max_over_median": 1.819557547569275,
+      "sqnr_db_per_tensor": 39.15,
+      "sqnr_db_per_channel": 44.01,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.11.dw",
+      "out_channels": 576,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 2.296295166015625,
+      "sqnr_db_per_tensor": 41.79,
+      "sqnr_db_per_channel": 47.39,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.11.project",
+      "out_channels": 96,
+      "weights_per_channel": 576,
+      "range_spread_max_over_median": 1.9545847177505493,
+      "sqnr_db_per_tensor": 36.3,
+      "sqnr_db_per_channel": 41.58,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.12.expand",
+      "out_channels": 576,
+      "weights_per_channel": 96,
+      "range_spread_max_over_median": 2.0014164447784424,
+      "sqnr_db_per_tensor": 38.46,
+      "sqnr_db_per_channel": 44.09,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.12.dw",
+      "out_channels": 576,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 2.0260956287384033,
+      "sqnr_db_per_tensor": 43.03,
+      "sqnr_db_per_channel": 47.63,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.12.project",
+      "out_channels": 96,
+      "weights_per_channel": 576,
+      "range_spread_max_over_median": 2.567180633544922,
+      "sqnr_db_per_tensor": 33.77,
+      "sqnr_db_per_channel": 40.85,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.13.expand",
+      "out_channels": 576,
+      "weights_per_channel": 96,
+      "range_spread_max_over_median": 1.6702039241790771,
+      "sqnr_db_per_tensor": 39.9,
+      "sqnr_db_per_channel": 43.95,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.13.dw",
+      "out_channels": 576,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 5.391815185546875,
+      "sqnr_db_per_tensor": 34.59,
+      "sqnr_db_per_channel": 47.52,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.13.project",
+      "out_channels": 160,
+      "weights_per_channel": 576,
+      "range_spread_max_over_median": 1.8443607091903687,
+      "sqnr_db_per_tensor": 36.2,
+      "sqnr_db_per_channel": 41.09,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.14.expand",
+      "out_channels": 960,
+      "weights_per_channel": 160,
+      "range_spread_max_over_median": 1.6774592399597168,
+      "sqnr_db_per_tensor": 39.72,
+      "sqnr_db_per_channel": 43.89,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.14.dw",
+      "out_channels": 960,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 2.0640530586242676,
+      "sqnr_db_per_tensor": 42.46,
+      "sqnr_db_per_channel": 47.22,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.14.project",
+      "out_channels": 160,
+      "weights_per_channel": 960,
+      "range_spread_max_over_median": 4.301768779754639,
+      "sqnr_db_per_tensor": 30.29,
+      "sqnr_db_per_channel": 40.2,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.15.expand",
+      "out_channels": 960,
+      "weights_per_channel": 160,
+      "range_spread_max_over_median": 2.1588053703308105,
+      "sqnr_db_per_tensor": 37.12,
+      "sqnr_db_per_channel": 43.36,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.15.dw",
+      "out_channels": 960,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 2.2663347721099854,
+      "sqnr_db_per_tensor": 41.72,
+      "sqnr_db_per_channel": 47.13,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.15.project",
+      "out_channels": 160,
+      "weights_per_channel": 960,
+      "range_spread_max_over_median": 5.549124240875244,
+      "sqnr_db_per_tensor": 28.61,
+      "sqnr_db_per_channel": 39.42,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.16.expand",
+      "out_channels": 960,
+      "weights_per_channel": 160,
+      "range_spread_max_over_median": 1.8744701147079468,
+      "sqnr_db_per_tensor": 38.46,
+      "sqnr_db_per_channel": 43.6,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.16.dw",
+      "out_channels": 960,
+      "weights_per_channel": 9,
+      "range_spread_max_over_median": 2.4830734729766846,
+      "sqnr_db_per_tensor": 41.33,
+      "sqnr_db_per_channel": 47.51,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "blocks.16.project",
+      "out_channels": 320,
+      "weights_per_channel": 960,
+      "range_spread_max_over_median": 1.550857424736023,
+      "sqnr_db_per_tensor": 37.71,
+      "sqnr_db_per_channel": 41.27,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "head",
+      "out_channels": 1280,
+      "weights_per_channel": 320,
+      "range_spread_max_over_median": 2.1358835697174072,
+      "sqnr_db_per_tensor": 35.69,
+      "sqnr_db_per_channel": 41.83,
+      "channels_zeroed_per_tensor": 0
+    },
+    {
+      "layer": "fc",
+      "out_channels": 10,
+      "weights_per_channel": 1280,
+      "range_spread_max_over_median": 2.0718157291412354,
+      "sqnr_db_per_tensor": 31.03,
+      "sqnr_db_per_channel": 35.64,
+      "channels_zeroed_per_tensor": 0
+    }
+  ],
+  "model_repr": "MobileNetV2Cifar(\n  (quant): Quantize(scale=tensor([0.0161]), zero_point=tensor([124]), dtype=torch.quint8)\n  (stem): ConvBNReLU(\n    (0): QuantizedConvReLU2d(3, 32, kernel_size=(3, 3), stride=(1, 1), scale=0.029545826837420464, zero_point=0, padding=(1, 1))\n    (1): Identity()\n    (2): Identity()\n  )\n  (blocks): Sequential(\n    (0): InvertedResidual(\n      (dw): ConvBNReLU(\n        (0): QuantizedConvReLU2d(32, 32, kernel_size=(3, 3), stride=(1, 1), scale=0.04149269685149193, zero_point=0, padding=(1, 1), groups=32)\n        (1): Identity()\n        (2): Identity()\n      )\n      (project): ConvBNReLU(\n        (0): QuantizedConv2d(32, 16, kernel_size=(1, 1), stride=(1, 1), scale=0.0646916851401329, zero_point=147)\n        (1): Identity()\n      )\n      (skip_add): QFunctional(\n        scale=1.0, zero_point=0\n        (activation_post_process): Identity()\n      )\n    )\n    (1): InvertedResidual(\n      (expand): ConvBNReLU(\n        (0): QuantizedConvReLU2d(16, 96, kernel_size=(1, 1), stride=(1, 1), scale=0.031913526356220245, zero_point=0)\n        (1): Identity()\n        (2): Identity()\n      )\n      (dw): ConvBNReLU(\n        (0): QuantizedConvReLU2d(96, 96, kernel_size=(3, 3), stride=(1, 1), scale=0.03794798254966736, zero_point=0, padding=(1, 1), groups=96)\n        (1): Identity()\n        (2): Identity()\n      )\n      (project): ConvBNReLU(\n        (0): QuantizedConv2d(96, 24, kernel_size=(1, 1), stride=(1, 1), scale=0.0628991350531578, zero_point=132)\n        (1): Identity()\n      )\n      (skip_add): QFunctional(\n        scale=1.0, zero_point=0\n        (activation_post_process): Identity()\n      )\n    )\n    (2): InvertedResidual(\n      (expand): ConvBNReLU(\n        (0): QuantizedConvReLU2d(24, 144, kernel_size=(1, 1), stride=(1, 1), scale=0.022012783214449883, zero_point=0)\n        (1): Identity()\n        (2): Identity()\n      )\n      (dw): ConvBNReLU(\n        (0): QuantizedConvReLU2d(144, 144, kernel_size=(3, 3), stride=(1, 1), scale=0.024018770083785057, zero_point=0, padding=(1, 1), groups=144)\n        (1): Identity()\n        (2): Identity()\n      )\n      (project): ConvBNReLU(\n        (0): QuantizedConv2d(144, 24, kernel_size=(1, 1), stride=(1, 1), scale=0.04433046281337738, zero_point=124)\n        (1): Identity()\n      )\n      (skip_add): QFunctional(\n        scale=0.07583913207054138, zero_point=131\n        (activation_post_process): Identity()\n      )\n    )\n    (3): InvertedResidual(\n      (expand): ConvBNReLU(\n        (0): QuantizedConvReLU2d(24, 144, kernel_size=(1, 1), stride=(1, 1), scale=0.024767188355326653, zero_point=0)\n        (1): Identity()\n        (2): Identity()\n      )\n      (dw): ConvBNReLU(\n        (0): QuantizedConvReLU2d(144, 144, kernel_size=(3, 3), stride=(2, 2), scale=0.04018951952457428, zero_point=0, padding=(1, 1), groups=144)\n        (1): Identity()\n        (2): Identity()\n      )\n      (project): ConvBNReLU(\n        (0): QuantizedConv2d(144, 32, kernel_size=(1, 1), stride=(1, 1), scale=0.07049533724784851, zero_point=119)\n        (1): Identity()\n      )\n      (skip_add): QFunctional(\n        scale=1.0, zero_point=0\n        (activation_post_process): Identity()\n      )\n    )\n    (4): InvertedResidual(\n      (expand): ConvBNReLU(\n        (0): QuantizedConvReLU2d(32, 192, kernel_size=(1, 1), stride=(1, 1), scale=0.02123776264488697, zero_point=0)\n        (1): Identity()\n        (2): Identity()\n      )\n      (dw): ConvBNReLU(\n        (0): QuantizedConvReLU2d(192, 192, kernel_size=(3, 3), stride=(1, 1), scale=0.022508839145302773, zero_point=0, padding=(1, 1), groups=192)\n        (1): Identity()\n        (2): Identity()\n      )\n      (project): ConvBNReLU(\n        (0): QuantizedConv2d(192, 32, kernel_size=(1, 1), stride=(1, 1), scale=0.03766966983675957, zero_point=124)\n        (1): Identity()\n      )\n      (skip_add): QFunctional(\n        scale=0.07397658377885818, zero_point=120\n        (activation_post_process): Identity()\n      )\n    )\n    (5): InvertedResidual(\n      (expand): ConvBNReLU(\n        (0"
+}

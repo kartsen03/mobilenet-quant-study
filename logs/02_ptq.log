@@ -1,0 +1,20 @@
+E:\mobilenet-quant-study\.venv\Lib\site-packages\torch\ao\quantization\observer.py:368: UserWarning: must run observer before calling calculate_qparams. Returning default values.
+  if not check_min_max_valid(min_val, max_val):
+{'weights': 'per_tensor', 'activations': 'minmax', 'calib_seed': 0, 'val_acc': 0.9314, 'test_acc': 0.9316, 'test_pred_changed_vs_fp32': 102, 'prepare_calibrate_convert_s': 3.2}
+{'weights': 'per_tensor', 'activations': 'minmax', 'calib_seed': 1, 'val_acc': 0.931, 'test_acc': 0.9308, 'test_pred_changed_vs_fp32': 84, 'prepare_calibrate_convert_s': 3.0}
+{'weights': 'per_tensor', 'activations': 'minmax', 'calib_seed': 2, 'val_acc': 0.9286, 'test_acc': 0.9307, 'test_pred_changed_vs_fp32': 97, 'prepare_calibrate_convert_s': 2.8}
+E:\mobilenet-quant-study\.venv\Lib\site-packages\torch\ao\nn\quantized\modules\functional_modules.py:296: UserWarning: must run observer before calling calculate_qparams.                                    Returning default scale and zero point 
+  scale, zero_point = mod.activation_post_process.calculate_qparams()  # type: ignore[operator]
+{'weights': 'per_tensor', 'activations': 'histogram', 'calib_seed': 0, 'val_acc': 0.9306, 'test_acc': 0.9316, 'test_pred_changed_vs_fp32': 86, 'prepare_calibrate_convert_s': 6.1}
+{'weights': 'per_tensor', 'activations': 'histogram', 'calib_seed': 1, 'val_acc': 0.9296, 'test_acc': 0.9326, 'test_pred_changed_vs_fp32': 72, 'prepare_calibrate_convert_s': 6.5}
+{'weights': 'per_tensor', 'activations': 'histogram', 'calib_seed': 2, 'val_acc': 0.9314, 'test_acc': 0.9319, 'test_pred_changed_vs_fp32': 73, 'prepare_calibrate_convert_s': 6.4}
+{'weights': 'per_channel', 'activations': 'minmax', 'calib_seed': 0, 'val_acc': 0.9308, 'test_acc': 0.9313, 'test_pred_changed_vs_fp32': 77, 'prepare_calibrate_convert_s': 3.0}
+{'weights': 'per_channel', 'activations': 'minmax', 'calib_seed': 1, 'val_acc': 0.9302, 'test_acc': 0.9314, 'test_pred_changed_vs_fp32': 75, 'prepare_calibrate_convert_s': 3.1}
+{'weights': 'per_channel', 'activations': 'minmax', 'calib_seed': 2, 'val_acc': 0.9306, 'test_acc': 0.9318, 'test_pred_changed_vs_fp32': 82, 'prepare_calibrate_convert_s': 2.9}
+{'weights': 'per_channel', 'activations': 'histogram', 'calib_seed': 0, 'val_acc': 0.9312, 'test_acc': 0.931, 'test_pred_changed_vs_fp32': 73, 'prepare_calibrate_convert_s': 6.5}
+{'weights': 'per_channel', 'activations': 'histogram', 'calib_seed': 1, 'val_acc': 0.9312, 'test_acc': 0.932, 'test_pred_changed_vs_fp32': 59, 'prepare_calibrate_convert_s': 6.8}
+{'weights': 'per_channel', 'activations': 'histogram', 'calib_seed': 2, 'val_acc': 0.9296, 'test_acc': 0.9321, 'test_pred_changed_vs_fp32': 59, 'prepare_calibrate_convert_s': 7.6}
+E:\mobilenet-quant-study\.venv\Lib\site-packages\torch\_utils.py:505: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  device=storage.device,
+{'test_acc': 0.931, 'val_acc': 0.9312, 'fp32_test_acc': 0.9331, 'size_bytes': 2641755, 'reload_bit_exact': True}
+wrote E:\mobilenet-quant-study\results\ptq.json
