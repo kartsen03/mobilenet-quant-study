@@ -35,6 +35,7 @@ def train(model: nn.Module, train_xy, val_xy, *, epochs: int, lr: float, wd: flo
           batch_size: int, seed: int, device: str, warmup_epochs: float = 0.0,
           amp_dtype: torch.dtype | None = None, channels_last: bool = False,
           on_epoch_start: Callable[[nn.Module, int], None] | None = None,
+          before_eval: Callable[[nn.Module], None] | None = None,
           log: Callable[[dict], None] = print) -> list[dict]:
     """SGD + Nesterov, linear warmup then cosine decay to zero, per-step schedule.
 
@@ -83,6 +84,8 @@ def train(model: nn.Module, train_xy, val_xy, *, epochs: int, lr: float, wd: flo
         if device.startswith("cuda"):
             torch.cuda.synchronize()
         secs = time.perf_counter() - t0
+        if before_eval is not None:
+            before_eval(model)
         val_pred = predict(model, val_xy[0], device=device, channels_last=channels_last)
         rec = {"epoch": epoch + 1,
                "train_loss": round(loss_sum.item() / n, 5),
