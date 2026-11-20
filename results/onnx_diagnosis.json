@@ -1,0 +1,72 @@
+{
+  "env": {
+    "timestamp": "2026-11-19T19:29:10-05:00",
+    "os": "Windows-10-10.0.26300-SP0",
+    "python": "3.11.9",
+    "numpy": "2.4.6",
+    "torch": "2.14.1+cu130",
+    "torch_cuda": "13.0",
+    "cudnn": 92400,
+    "cuda_available": true,
+    "quantized_engines": [
+      "onednn"
+    ],
+    "quantized_engine": "onednn",
+    "torch_threads": 14,
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700H",
+    "logical_cpus": 20,
+    "performance_cpus": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "driver": "592.00",
+      "memory": "6144 MiB"
+    },
+    "power_plan": "Turbo",
+    "git": {
+      "commit": "941060cfb7806623311d871e238b88660e2f7591",
+      "code_dirty": false
+    },
+    "torchvision": "0.29.1+cu130",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.32.0",
+    "onnxscript": "0.7.2",
+    "git_at_write": {
+      "commit": "941060cfb7806623311d871e238b88660e2f7591",
+      "code_dirty": false
+    }
+  },
+  "note": "Step 6b: where does the INT8 PyTorch-vs-ORT difference come from?\n\nRuns the PTQ QDQ model in ORT at three graph-optimization levels on 2,000 test\nimages. At ORT_DISABLE_ALL nothing is fused: each QuantizeLinear/DequantizeLinear\npair runs as written around a *float* Conv, i.e. the ONNX reference semantics. If\nthat already differs from PyTorch as much as the fully fused INT8 graph does, the\ngap comes from PyTorch's oneDNN INT8 kernels (int32 bias, requantization rounding)\nvs the QDQ reference math, not from ORT's fused kernels.",
+  "n_images": 2000,
+  "output_quant_step": 0.15705175697803497,
+  "by_level": {
+    "ORT_DISABLE_ALL": {
+      "max_diff_steps_vs_torch": 4.0,
+      "mean_diff_steps_vs_torch": 0.4115,
+      "frac_logits_exact": 0.613,
+      "pred_mismatch_vs_torch": 4
+    },
+    "ORT_ENABLE_BASIC": {
+      "max_diff_steps_vs_torch": 4.0,
+      "mean_diff_steps_vs_torch": 0.4115,
+      "frac_logits_exact": 0.613,
+      "pred_mismatch_vs_torch": 4
+    },
+    "ORT_ENABLE_ALL": {
+      "max_diff_steps_vs_torch": 4.0,
+      "mean_diff_steps_vs_torch": 0.4169,
+      "frac_logits_exact": 0.6099,
+      "pred_mismatch_vs_torch": 5
+    }
+  },
+  "ort_fused_vs_ort_reference": {
+    "max_diff_steps": 2.0,
+    "pred_mismatch": 5
+  }
+}
