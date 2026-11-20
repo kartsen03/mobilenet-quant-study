@@ -1,0 +1,26 @@
+E:\mobilenet-quant-study\experiments\03_qat.py:54: DeprecationWarning: torch.ao.quantization is deprecated and will be removed in 2.10. 
+For migrations of users: 
+1. Eager mode quantization (torch.ao.quantization.quantize, torch.ao.quantization.quantize_dynamic), please migrate to use torchao eager mode quantize_ API instead 
+2. FX graph mode quantization (torch.ao.quantization.quantize_fx.prepare_fx,torch.ao.quantization.quantize_fx.convert_fx, please migrate to use torchao pt2e quantization API instead (prepare_pt2e, convert_pt2e) 
+3. pt2e quantization has been migrated to torchao (https://github.com/pytorch/ao/tree/main/torchao/quantization/pt2e) 
+see https://github.com/pytorch/ao/issues/2259 for more details
+  tq.prepare_qat(qat, inplace=True)
+{'epoch': 1, 'train_loss': 0.03402, 'train_acc': 0.98847, 'val_acc': 0.927, 'lr_end': 0.004523, 'seconds': 83.51}
+{'epoch': 2, 'train_loss': 0.03387, 'train_acc': 0.98824, 'val_acc': 0.9304, 'lr_end': 0.003273, 'seconds': 80.21}
+{'epoch': 3, 'train_loss': 0.0287, 'train_acc': 0.99009, 'val_acc': 0.931, 'lr_end': 0.001727, 'seconds': 76.38}
+{'epoch': 4, 'train_loss': 0.0196, 'train_acc': 0.99322, 'val_acc': 0.931, 'lr_end': 0.000477, 'seconds': 110.19}
+{'epoch': 5, 'train_loss': 0.01132, 'train_acc': 0.99638, 'val_acc': 0.9324, 'lr_end': 0.0, 'seconds': 101.05}
+E:\mobilenet-quant-study\.venv\Lib\site-packages\torch\ao\quantization\observer.py:368: UserWarning: must run observer before calling calculate_qparams. Returning default values.
+  if not check_min_max_valid(min_val, max_val):
+E:\mobilenet-quant-study\.venv\Lib\site-packages\torch\_utils.py:505: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  device=storage.device,
+{'val_acc_fake_quant_gpu': 0.9324, 'test_acc': 0.9344, 'val_acc': 0.9328, 'test_pred_changed_vs_fp32': 211, 'size_bytes': 2641755, 'reload_bit_exact': True}
+{'epoch': 1, 'train_loss': 0.03379, 'train_acc': 0.98858, 'val_acc': 0.9254, 'lr_end': 0.004523, 'seconds': 39.12}
+{'epoch': 2, 'train_loss': 0.03388, 'train_acc': 0.98824, 'val_acc': 0.9294, 'lr_end': 0.003273, 'seconds': 38.5}
+{'epoch': 3, 'train_loss': 0.02785, 'train_acc': 0.99069, 'val_acc': 0.9306, 'lr_end': 0.001727, 'seconds': 39.73}
+{'epoch': 4, 'train_loss': 0.02163, 'train_acc': 0.99287, 'val_acc': 0.9334, 'lr_end': 0.000477, 'seconds': 39.39}
+{'epoch': 5, 'train_loss': 0.01716, 'train_acc': 0.99476, 'val_acc': 0.9322, 'lr_end': 0.0, 'seconds': 39.67}
+E:\mobilenet-quant-study\.venv\Lib\site-packages\torch\ao\nn\quantized\modules\functional_modules.py:296: UserWarning: must run observer before calling calculate_qparams.                                    Returning default scale and zero point 
+  scale, zero_point = mod.activation_post_process.calculate_qparams()  # type: ignore[operator]
+control {'fp32_test_acc': 0.9338, 'ptq_test_acc': 0.9336, 'ptq_val_acc': 0.9332}
+wrote E:\mobilenet-quant-study\results\qat.json

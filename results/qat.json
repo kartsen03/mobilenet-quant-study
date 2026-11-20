@@ -1,0 +1,152 @@
+{
+  "env": {
+    "timestamp": "2026-11-19T19:01:16-05:00",
+    "os": "Windows-10-10.0.26300-SP0",
+    "python": "3.11.9",
+    "numpy": "2.4.6",
+    "torch": "2.14.1+cu130",
+    "torch_cuda": "13.0",
+    "cudnn": 92400,
+    "cuda_available": true,
+    "quantized_engines": [
+      "onednn"
+    ],
+    "quantized_engine": "onednn",
+    "torch_threads": 14,
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700H",
+    "logical_cpus": 20,
+    "performance_cpus": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "driver": "592.00",
+      "memory": "6144 MiB"
+    },
+    "power_plan": "Turbo",
+    "git": {
+      "commit": "33185088cc2dcbad2406e9c7351237027b4f429e",
+      "code_dirty": false
+    },
+    "torchvision": "0.29.1+cu130",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.32.0",
+    "onnxscript": "0.7.2",
+    "git_at_write": {
+      "commit": "20bc1b75fbf05e33c93da82fc5967af396721ef2",
+      "code_dirty": false
+    }
+  },
+  "config": {
+    "epochs": 5,
+    "lr": 0.005,
+    "wd": 0.0005,
+    "batch_size": 128,
+    "freeze_bn_epoch": 3,
+    "freeze_observer_epoch": 4,
+    "seed": 0,
+    "skip_control": false,
+    "qconfig": "get_default_qat_qconfig('onednn')",
+    "precision": "FP32 (no autocast) with fake quantization"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.03402,
+      "train_acc": 0.98847,
+      "val_acc": 0.927,
+      "lr_end": 0.004523,
+      "seconds": 83.51
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.03387,
+      "train_acc": 0.98824,
+      "val_acc": 0.9304,
+      "lr_end": 0.003273,
+      "seconds": 80.21
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.0287,
+      "train_acc": 0.99009,
+      "val_acc": 0.931,
+      "lr_end": 0.001727,
+      "seconds": 76.38
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.0196,
+      "train_acc": 0.99322,
+      "val_acc": 0.931,
+      "lr_end": 0.000477,
+      "seconds": 110.19
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.01132,
+      "train_acc": 0.99638,
+      "val_acc": 0.9324,
+      "lr_end": 0.0,
+      "seconds": 101.05
+    }
+  ],
+  "val_acc_fake_quant_gpu": 0.9324,
+  "test_acc": 0.9344,
+  "val_acc": 0.9328,
+  "test_pred_changed_vs_fp32": 211,
+  "size_bytes": 2641755,
+  "reload_bit_exact": true,
+  "control_finetune_then_ptq": {
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.03379,
+        "train_acc": 0.98858,
+        "val_acc": 0.9254,
+        "lr_end": 0.004523,
+        "seconds": 39.12
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.03388,
+        "train_acc": 0.98824,
+        "val_acc": 0.9294,
+        "lr_end": 0.003273,
+        "seconds": 38.5
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.02785,
+        "train_acc": 0.99069,
+        "val_acc": 0.9306,
+        "lr_end": 0.001727,
+        "seconds": 39.73
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.02163,
+        "train_acc": 0.99287,
+        "val_acc": 0.9334,
+        "lr_end": 0.000477,
+        "seconds": 39.39
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.01716,
+        "train_acc": 0.99476,
+        "val_acc": 0.9322,
+        "lr_end": 0.0,
+        "seconds": 39.67
+      }
+    ],
+    "fp32_test_acc": 0.9338,
+    "ptq_test_acc": 0.9336,
+    "ptq_val_acc": 0.9332
+  }
+}

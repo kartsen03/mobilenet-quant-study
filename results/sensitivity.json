@@ -1,0 +1,609 @@
+{
+  "env": {
+    "timestamp": "2026-11-19T19:05:32-05:00",
+    "os": "Windows-10-10.0.26300-SP0",
+    "python": "3.11.9",
+    "numpy": "2.4.6",
+    "torch": "2.14.1+cu130",
+    "torch_cuda": "13.0",
+    "cudnn": 92400,
+    "cuda_available": true,
+    "quantized_engines": [
+      "onednn"
+    ],
+    "quantized_engine": "onednn",
+    "torch_threads": 14,
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700H",
+    "logical_cpus": 20,
+    "performance_cpus": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "driver": "592.00",
+      "memory": "6144 MiB"
+    },
+    "power_plan": "Turbo",
+    "git": {
+      "commit": "20bc1b75fbf05e33c93da82fc5967af396721ef2",
+      "code_dirty": false
+    },
+    "torchvision": "0.29.1+cu130",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.32.0",
+    "onnxscript": "0.7.2",
+    "git_at_write": {
+      "commit": "20bc1b75fbf05e33c93da82fc5967af396721ef2",
+      "code_dirty": false
+    }
+  },
+  "config": {
+    "engine": "onednn",
+    "calib": "1024 train images, seed 0",
+    "ranking": "ascending validation logit SQNR (single layer INT8)",
+    "headline": "mixed_3"
+  },
+  "fp32_val_acc": 0.9312,
+  "fp32_test_acc": 0.9331,
+  "full_int8_val": {
+    "val_acc": 0.9312,
+    "logit_sqnr_db": 30.91
+  },
+  "per_layer_minutes": 17.4,
+  "per_layer": [
+    {
+      "layer": "stem",
+      "kind": "stem",
+      "val_acc": 0.9314,
+      "val_acc_drop_pts": -0.02,
+      "val_pred_changed": 16,
+      "logit_sqnr_db": 38.48
+    },
+    {
+      "layer": "blocks.0.dw",
+      "kind": "dw",
+      "val_acc": 0.9318,
+      "val_acc_drop_pts": -0.06,
+      "val_pred_changed": 12,
+      "logit_sqnr_db": 39.24
+    },
+    {
+      "layer": "blocks.0.project",
+      "kind": "project",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 13,
+      "logit_sqnr_db": 42.8
+    },
+    {
+      "layer": "blocks.1.expand",
+      "kind": "expand",
+      "val_acc": 0.9308,
+      "val_acc_drop_pts": 0.04,
+      "val_pred_changed": 4,
+      "logit_sqnr_db": 44.24
+    },
+    {
+      "layer": "blocks.1.dw",
+      "kind": "dw",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 9,
+      "logit_sqnr_db": 42.91
+    },
+    {
+      "layer": "blocks.1.project",
+      "kind": "project",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 5,
+      "logit_sqnr_db": 46.5
+    },
+    {
+      "layer": "blocks.2.expand",
+      "kind": "expand",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 2,
+      "logit_sqnr_db": 52.18
+    },
+    {
+      "layer": "blocks.2.dw",
+      "kind": "dw",
+      "val_acc": 0.931,
+      "val_acc_drop_pts": 0.02,
+      "val_pred_changed": 1,
+      "logit_sqnr_db": 52.9
+    },
+    {
+      "layer": "blocks.2.project",
+      "kind": "project",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 2,
+      "logit_sqnr_db": 52.39
+    },
+    {
+      "layer": "blocks.3.expand",
+      "kind": "expand",
+      "val_acc": 0.9316,
+      "val_acc_drop_pts": -0.04,
+      "val_pred_changed": 5,
+      "logit_sqnr_db": 49.01
+    },
+    {
+      "layer": "blocks.3.dw",
+      "kind": "dw",
+      "val_acc": 0.9316,
+      "val_acc_drop_pts": -0.04,
+      "val_pred_changed": 6,
+      "logit_sqnr_db": 48.55
+    },
+    {
+      "layer": "blocks.3.project",
+      "kind": "project",
+      "val_acc": 0.9314,
+      "val_acc_drop_pts": -0.02,
+      "val_pred_changed": 6,
+      "logit_sqnr_db": 46.57
+    },
+    {
+      "layer": "blocks.4.expand",
+      "kind": "expand",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 3,
+      "logit_sqnr_db": 56.01
+    },
+    {
+      "layer": "blocks.4.dw",
+      "kind": "dw",
+      "val_acc": 0.9314,
+      "val_acc_drop_pts": -0.02,
+      "val_pred_changed": 3,
+      "logit_sqnr_db": 54.05
+    },
+    {
+      "layer": "blocks.4.project",
+      "kind": "project",
+      "val_acc": 0.9318,
+      "val_acc_drop_pts": -0.06,
+      "val_pred_changed": 3,
+      "logit_sqnr_db": 52.15
+    },
+    {
+      "layer": "blocks.5.expand",
+      "kind": "expand",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 1,
+      "logit_sqnr_db": 55.01
+    },
+    {
+      "layer": "blocks.5.dw",
+      "kind": "dw",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 2,
+      "logit_sqnr_db": 53.62
+    },
+    {
+      "layer": "blocks.5.project",
+      "kind": "project",
+      "val_acc": 0.9316,
+      "val_acc_drop_pts": -0.04,
+      "val_pred_changed": 2,
+      "logit_sqnr_db": 51.8
+    },
+    {
+      "layer": "blocks.6.expand",
+      "kind": "expand",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 3,
+      "logit_sqnr_db": 46.97
+    },
+    {
+      "layer": "blocks.6.dw",
+      "kind": "dw",
+      "val_acc": 0.931,
+      "val_acc_drop_pts": 0.02,
+      "val_pred_changed": 5,
+      "logit_sqnr_db": 42.22
+    },
+    {
+      "layer": "blocks.6.project",
+      "kind": "project",
+      "val_acc": 0.9314,
+      "val_acc_drop_pts": -0.02,
+      "val_pred_changed": 8,
+      "logit_sqnr_db": 41.53
+    },
+    {
+      "layer": "blocks.7.expand",
+      "kind": "expand",
+      "val_acc": 0.9316,
+      "val_acc_drop_pts": -0.04,
+      "val_pred_changed": 2,
+      "logit_sqnr_db": 55.14
+    },
+    {
+      "layer": "blocks.7.dw",
+      "kind": "dw",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 0,
+      "logit_sqnr_db": 53.38
+    },
+    {
+      "layer": "blocks.7.project",
+      "kind": "project",
+      "val_acc": 0.9316,
+      "val_acc_drop_pts": -0.04,
+      "val_pred_changed": 4,
+      "logit_sqnr_db": 52.65
+    },
+    {
+      "layer": "blocks.8.expand",
+      "kind": "expand",
+      "val_acc": 0.9314,
+      "val_acc_drop_pts": -0.02,
+      "val_pred_changed": 2,
+      "logit_sqnr_db": 56.08
+    },
+    {
+      "layer": "blocks.8.dw",
+      "kind": "dw",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 2,
+      "logit_sqnr_db": 54.91
+    },
+    {
+      "layer": "blocks.8.project",
+      "kind": "project",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 2,
+      "logit_sqnr_db": 53.77
+    },
+    {
+      "layer": "blocks.9.expand",
+      "kind": "expand",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 0,
+      "logit_sqnr_db": 55.45
+    },
+    {
+      "layer": "blocks.9.dw",
+      "kind": "dw",
+      "val_acc": 0.9314,
+      "val_acc_drop_pts": -0.02,
+      "val_pred_changed": 1,
+      "logit_sqnr_db": 53.64
+    },
+    {
+      "layer": "blocks.9.project",
+      "kind": "project",
+      "val_acc": 0.9316,
+      "val_acc_drop_pts": -0.04,
+      "val_pred_changed": 2,
+      "logit_sqnr_db": 53.02
+    },
+    {
+      "layer": "blocks.10.expand",
+      "kind": "expand",
+      "val_acc": 0.9318,
+      "val_acc_drop_pts": -0.06,
+      "val_pred_changed": 5,
+      "logit_sqnr_db": 43.23
+    },
+    {
+      "layer": "blocks.10.dw",
+      "kind": "dw",
+      "val_acc": 0.9314,
+      "val_acc_drop_pts": -0.02,
+      "val_pred_changed": 4,
+      "logit_sqnr_db": 42.1
+    },
+    {
+      "layer": "blocks.10.project",
+      "kind": "project",
+      "val_acc": 0.9314,
+      "val_acc_drop_pts": -0.02,
+      "val_pred_changed": 1,
+      "logit_sqnr_db": 45.22
+    },
+    {
+      "layer": "blocks.11.expand",
+      "kind": "expand",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 0,
+      "logit_sqnr_db": 56.29
+    },
+    {
+      "layer": "blocks.11.dw",
+      "kind": "dw",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 0,
+      "logit_sqnr_db": 51.06
+    },
+    {
+      "layer": "blocks.11.project",
+      "kind": "project",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 1,
+      "logit_sqnr_db": 51.16
+    },
+    {
+      "layer": "blocks.12.expand",
+      "kind": "expand",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 0,
+      "logit_sqnr_db": 58.32
+    },
+    {
+      "layer": "blocks.12.dw",
+      "kind": "dw",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 0,
+      "logit_sqnr_db": 53.18
+    },
+    {
+      "layer": "blocks.12.project",
+      "kind": "project",
+      "val_acc": 0.931,
+      "val_acc_drop_pts": 0.02,
+      "val_pred_changed": 1,
+      "logit_sqnr_db": 53.78
+    },
+    {
+      "layer": "blocks.13.expand",
+      "kind": "expand",
+      "val_acc": 0.9314,
+      "val_acc_drop_pts": -0.02,
+      "val_pred_changed": 1,
+      "logit_sqnr_db": 51.85
+    },
+    {
+      "layer": "blocks.13.dw",
+      "kind": "dw",
+      "val_acc": 0.9308,
+      "val_acc_drop_pts": 0.04,
+      "val_pred_changed": 2,
+      "logit_sqnr_db": 47.51
+    },
+    {
+      "layer": "blocks.13.project",
+      "kind": "project",
+      "val_acc": 0.9314,
+      "val_acc_drop_pts": -0.02,
+      "val_pred_changed": 2,
+      "logit_sqnr_db": 47.44
+    },
+    {
+      "layer": "blocks.14.expand",
+      "kind": "expand",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 0,
+      "logit_sqnr_db": 60.75
+    },
+    {
+      "layer": "blocks.14.dw",
+      "kind": "dw",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 0,
+      "logit_sqnr_db": 59.77
+    },
+    {
+      "layer": "blocks.14.project",
+      "kind": "project",
+      "val_acc": 0.931,
+      "val_acc_drop_pts": 0.02,
+      "val_pred_changed": 1,
+      "logit_sqnr_db": 55.36
+    },
+    {
+      "layer": "blocks.15.expand",
+      "kind": "expand",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 0,
+      "logit_sqnr_db": 63.78
+    },
+    {
+      "layer": "blocks.15.dw",
+      "kind": "dw",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 0,
+      "logit_sqnr_db": 60.6
+    },
+    {
+      "layer": "blocks.15.project",
+      "kind": "project",
+      "val_acc": 0.931,
+      "val_acc_drop_pts": 0.02,
+      "val_pred_changed": 1,
+      "logit_sqnr_db": 51.9
+    },
+    {
+      "layer": "blocks.16.expand",
+      "kind": "expand",
+      "val_acc": 0.9318,
+      "val_acc_drop_pts": -0.06,
+      "val_pred_changed": 5,
+      "logit_sqnr_db": 48.53
+    },
+    {
+      "layer": "blocks.16.dw",
+      "kind": "dw",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 0,
+      "logit_sqnr_db": 48.9
+    },
+    {
+      "layer": "blocks.16.project",
+      "kind": "project",
+      "val_acc": 0.9314,
+      "val_acc_drop_pts": -0.02,
+      "val_pred_changed": 1,
+      "logit_sqnr_db": 51.81
+    },
+    {
+      "layer": "head",
+      "kind": "head",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 0,
+      "logit_sqnr_db": 52.73
+    },
+    {
+      "layer": "fc",
+      "kind": "fc",
+      "val_acc": 0.9312,
+      "val_acc_drop_pts": 0.0,
+      "val_pred_changed": 8,
+      "logit_sqnr_db": 41.58
+    }
+  ],
+  "ranked": [
+    "stem",
+    "blocks.0.dw",
+    "blocks.6.project",
+    "fc",
+    "blocks.10.dw",
+    "blocks.6.dw",
+    "blocks.0.project",
+    "blocks.1.dw",
+    "blocks.10.expand",
+    "blocks.1.expand",
+    "blocks.10.project",
+    "blocks.1.project",
+    "blocks.3.project",
+    "blocks.6.expand",
+    "blocks.13.project",
+    "blocks.13.dw",
+    "blocks.16.expand",
+    "blocks.3.dw",
+    "blocks.16.dw",
+    "blocks.3.expand",
+    "blocks.11.dw",
+    "blocks.11.project",
+    "blocks.5.project",
+    "blocks.16.project",
+    "blocks.13.expand",
+    "blocks.15.project",
+    "blocks.4.project",
+    "blocks.2.expand",
+    "blocks.2.project",
+    "blocks.7.project",
+    "head",
+    "blocks.2.dw",
+    "blocks.9.project",
+    "blocks.12.dw",
+    "blocks.7.dw",
+    "blocks.5.dw",
+    "blocks.9.dw",
+    "blocks.8.project",
+    "blocks.12.project",
+    "blocks.4.dw",
+    "blocks.8.dw",
+    "blocks.5.expand",
+    "blocks.7.expand",
+    "blocks.14.project",
+    "blocks.9.expand",
+    "blocks.4.expand",
+    "blocks.8.expand",
+    "blocks.11.expand",
+    "blocks.12.expand",
+    "blocks.14.dw",
+    "blocks.15.dw",
+    "blocks.14.expand",
+    "blocks.15.expand"
+  ],
+  "curve": [
+    {
+      "k": 0,
+      "val_acc": 0.9312,
+      "test_acc": 0.931,
+      "size_bytes": 2641755,
+      "float_layers": []
+    },
+    {
+      "k": 1,
+      "float_layers": [
+        "stem"
+      ],
+      "val_acc": 0.9304,
+      "test_acc": 0.9325,
+      "size_bytes": 2657791
+    },
+    {
+      "k": 2,
+      "float_layers": [
+        "stem",
+        "blocks.0.dw"
+      ],
+      "val_acc": 0.931,
+      "test_acc": 0.9332,
+      "size_bytes": 2657859
+    },
+    {
+      "k": 3,
+      "float_layers": [
+        "stem",
+        "blocks.0.dw",
+        "blocks.6.project"
+      ],
+      "val_acc": 0.9318,
+      "test_acc": 0.9325,
+      "size_bytes": 2693383
+    },
+    {
+      "k": 5,
+      "float_layers": [
+        "stem",
+        "blocks.0.dw",
+        "blocks.6.project",
+        "fc",
+        "blocks.10.dw"
+      ],
+      "val_acc": 0.9312,
+      "test_acc": 0.9327,
+      "size_bytes": 2735055
+    },
+    {
+      "k": 10,
+      "float_layers": [
+        "stem",
+        "blocks.0.dw",
+        "blocks.6.project",
+        "fc",
+        "blocks.10.dw",
+        "blocks.6.dw",
+        "blocks.0.project",
+        "blocks.1.dw",
+        "blocks.10.expand",
+        "blocks.1.expand"
+      ],
+      "val_acc": 0.9322,
+      "test_acc": 0.9317,
+      "size_bytes": 2809399
+    }
+  ]
+}

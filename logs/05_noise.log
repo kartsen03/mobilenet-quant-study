@@ -1,0 +1,27 @@
+E:\mobilenet-quant-study\.venv\Lib\site-packages\torch\_utils.py:505: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  device=storage.device,
+fp32 0 0.933 0.0
+fp32 0.005 0.9319 0.0008
+fp32 0.01 0.9306 0.0015
+fp32 0.02 0.922 0.003
+fp32 0.03 0.9078 0.0077
+fp32 0.05 0.8465 0.0269
+fp32 0.075 0.656 0.0783
+fp32 0.1 0.3726 0.0995
+ptq 0 0.9326 0.0
+ptq 0.005 0.9318 0.0006
+ptq 0.01 0.9301 0.0012
+ptq 0.02 0.9222 0.0029
+ptq 0.03 0.9078 0.008
+ptq 0.05 0.8454 0.0274
+ptq 0.075 0.6548 0.0798
+ptq 0.1 0.373 0.1017
+qat 0 0.9333 0.0
+qat 0.005 0.9331 0.0008
+qat 0.01 0.9314 0.0018
+qat 0.02 0.9232 0.0047
+qat 0.03 0.9083 0.0094
+qat 0.05 0.8465 0.0276
+qat 0.075 0.6597 0.0774
+qat 0.1 0.3762 0.1016
+wrote E:\mobilenet-quant-study\results\noise.json

@@ -1,0 +1,109 @@
+{
+  "env": {
+    "timestamp": "2026-11-19T19:05:32-05:00",
+    "os": "Windows-10-10.0.26300-SP0",
+    "python": "3.11.9",
+    "numpy": "2.4.6",
+    "torch": "2.14.1+cu130",
+    "torch_cuda": "13.0",
+    "cudnn": 92400,
+    "cuda_available": true,
+    "quantized_engines": [
+      "onednn"
+    ],
+    "quantized_engine": "onednn",
+    "torch_threads": 14,
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700H",
+    "logical_cpus": 20,
+    "performance_cpus": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "driver": "592.00",
+      "memory": "6144 MiB"
+    },
+    "power_plan": "Turbo",
+    "git": {
+      "commit": "20bc1b75fbf05e33c93da82fc5967af396721ef2",
+      "code_dirty": false
+    },
+    "torchvision": "0.29.1+cu130",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.32.0",
+    "onnxscript": "0.7.2",
+    "git_at_write": {
+      "commit": "20bc1b75fbf05e33c93da82fc5967af396721ef2",
+      "code_dirty": false
+    }
+  },
+  "headline": "mixed_3",
+  "models": {
+    "mixed_1": {
+      "k": 1,
+      "float_layers": [
+        "stem"
+      ],
+      "val_acc": 0.9304,
+      "test_acc": 0.9325,
+      "size_bytes": 2657791
+    },
+    "mixed_2": {
+      "k": 2,
+      "float_layers": [
+        "stem",
+        "blocks.0.dw"
+      ],
+      "val_acc": 0.931,
+      "test_acc": 0.9332,
+      "size_bytes": 2657859
+    },
+    "mixed_3": {
+      "k": 3,
+      "float_layers": [
+        "stem",
+        "blocks.0.dw",
+        "blocks.6.project"
+      ],
+      "val_acc": 0.9318,
+      "test_acc": 0.9325,
+      "size_bytes": 2693383
+    },
+    "mixed_5": {
+      "k": 5,
+      "float_layers": [
+        "stem",
+        "blocks.0.dw",
+        "blocks.6.project",
+        "fc",
+        "blocks.10.dw"
+      ],
+      "val_acc": 0.9312,
+      "test_acc": 0.9327,
+      "size_bytes": 2735055
+    },
+    "mixed_10": {
+      "k": 10,
+      "float_layers": [
+        "stem",
+        "blocks.0.dw",
+        "blocks.6.project",
+        "fc",
+        "blocks.10.dw",
+        "blocks.6.dw",
+        "blocks.0.project",
+        "blocks.1.dw",
+        "blocks.10.expand",
+        "blocks.1.expand"
+      ],
+      "val_acc": 0.9322,
+      "test_acc": 0.9317,
+      "size_bytes": 2809399
+    }
+  }
+}
