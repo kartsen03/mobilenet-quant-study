@@ -1,0 +1,12 @@
+RESUME NUMBERS — MobileNetV2 (CIFAR-10 variant) quantization study
+Accuracy (CIFAR-10 test, 10k): FP32 93.31% | PTQ INT8 93.10% | QAT INT8 93.44% | mixed (3 FP32 layers) 93.25%
+Accuracy drop vs FP32: PTQ +0.21 pts | QAT -0.13 pts | mixed +0.06 pts (positive = lost)
+Size: FP32 9.17 MB -> INT8 2.64 MB (3.47x smaller); mixed 2.69 MB
+CPU latency, batch 1, PyTorch 1 thread: FP32 6.57 ms -> PTQ 4.36 ms (1.51x); 6 threads: 6.15 -> 3.35 ms (1.84x)
+CPU latency, ONNX Runtime 1 thread: FP32 2.34 ms -> INT8 1.33 ms (1.76x); 6 threads: 0.75 -> 0.61 ms
+Most sensitive layers (single-layer INT8, val logit SQNR): stem (38.48 dB), blocks.0.dw (39.24 dB), blocks.6.project (41.53 dB)
+Weight noise (simulated, sigma = eta*max|w| per layer, 10 draws): eta=0.05: FP32 84.65±2.69% vs QAT 84.65±2.76%; eta=0.1: FP32 37.26±9.95% vs QAT 37.62±10.16%
+ONNX Runtime match (10k test images): FP32 max |diff| 1.1e-05 (tol 1e-4); INT8 PTQ max |diff| 0.628 = 4.0 output steps ; 35/10000 prediction mismatches -> FAILS the pre-set INT8 tolerance (<=5 steps and <=10 mismatches); ORT INT8 test acc 93.25% vs PyTorch 93.10%
+Versions: Python 3.11.9, PyTorch 2.14.1+cu130, ONNX Runtime 1.32.0, ONNX 1.23.2, quantized engine onednn
+Hardware: 12th Gen Intel(R) Core(TM) i7-12700H (CPU INT8), NVIDIA GeForce RTX 3060 Laptop GPU (training), Windows-10-10.0.26300-SP0
+Commit (latency run): 05eae31cd60c048106dd21b992bf6e03b9c8499a

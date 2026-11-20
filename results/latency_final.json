@@ -1,0 +1,308 @@
+{
+  "env": {
+    "timestamp": "2026-11-19T19:29:49-05:00",
+    "os": "Windows-10-10.0.26300-SP0",
+    "python": "3.11.9",
+    "numpy": "2.4.6",
+    "torch": "2.14.1+cu130",
+    "torch_cuda": "13.0",
+    "cudnn": 92400,
+    "cuda_available": true,
+    "quantized_engines": [
+      "onednn"
+    ],
+    "quantized_engine": "onednn",
+    "torch_threads": 14,
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700H",
+    "logical_cpus": 20,
+    "performance_cpus": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "driver": "592.00",
+      "memory": "6144 MiB"
+    },
+    "power_plan": "Turbo",
+    "git": {
+      "commit": "05eae31cd60c048106dd21b992bf6e03b9c8499a",
+      "code_dirty": false
+    },
+    "torchvision": "0.29.1+cu130",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.32.0",
+    "onnxscript": "0.7.2",
+    "git_at_write": {
+      "commit": "05eae31cd60c048106dd21b992bf6e03b9c8499a",
+      "code_dirty": false
+    }
+  },
+  "method": "CPU latency per image (batch 1) for PyTorch and ONNX Runtime models.\n\nMethod:\n- each thread count runs in its own process, pinned to that many performance\n  cores (one logical CPU per P-core, so no SMT sharing and no E-cores);\n- models are timed in interleaved rounds (shuffled order each round) so thermal\n  drift and background noise hit every model equally;\n- each round: 0.5 s warmup, then `runs` individually timed calls;\n- reported: median over all rounds (plus p05/p95 and per-round medians).\n\nUsage: python experiments/latency.py --models fp32_fused ptq --tag stage2\n       ONNX models are named ort:<file stem in checkpoints/>, e.g. ort:fp32",
+  "rounds": 5,
+  "runs_per_round": 100,
+  "batch_size": 1,
+  "by_threads": {
+    "1": {
+      "threads": 1,
+      "pinned_cpus": [
+        0
+      ],
+      "torch_threads": 1,
+      "models": {
+        "fp32": {
+          "median_ms": 7.8802,
+          "p05_ms": 7.2542,
+          "p95_ms": 9.7183,
+          "n": 500,
+          "round_medians_ms": [
+            7.7467,
+            8.0863,
+            8.0096,
+            7.9131,
+            7.7191
+          ]
+        },
+        "fp32_fused": {
+          "median_ms": 6.5739,
+          "p05_ms": 6.0728,
+          "p95_ms": 8.2635,
+          "n": 500,
+          "round_medians_ms": [
+            6.6639,
+            6.6085,
+            6.5701,
+            6.4899,
+            6.5705
+          ]
+        },
+        "ptq": {
+          "median_ms": 4.3595,
+          "p05_ms": 4.0711,
+          "p95_ms": 5.684,
+          "n": 500,
+          "round_medians_ms": [
+            4.3423,
+            4.3242,
+            4.3694,
+            4.3053,
+            4.4604
+          ]
+        },
+        "qat": {
+          "median_ms": 4.3373,
+          "p05_ms": 4.0663,
+          "p95_ms": 5.3957,
+          "n": 500,
+          "round_medians_ms": [
+            4.3605,
+            4.3712,
+            4.384,
+            4.3093,
+            4.2622
+          ]
+        },
+        "mixed_3": {
+          "median_ms": 5.0511,
+          "p05_ms": 4.671,
+          "p95_ms": 6.438,
+          "n": 500,
+          "round_medians_ms": [
+            4.9579,
+            5.1209,
+            5.0313,
+            5.1648,
+            5.0121
+          ]
+        },
+        "ort:fp32": {
+          "median_ms": 2.3418,
+          "p05_ms": 2.2655,
+          "p95_ms": 3.0178,
+          "n": 500,
+          "round_medians_ms": [
+            2.3628,
+            2.3361,
+            2.3192,
+            2.3272,
+            2.3441
+          ]
+        },
+        "ort:ptq": {
+          "median_ms": 1.3293,
+          "p05_ms": 1.3082,
+          "p95_ms": 1.7629,
+          "n": 500,
+          "round_medians_ms": [
+            1.3371,
+            1.3426,
+            1.3209,
+            1.3289,
+            1.3264
+          ]
+        },
+        "ort:qat": {
+          "median_ms": 1.3638,
+          "p05_ms": 1.3102,
+          "p95_ms": 1.9063,
+          "n": 500,
+          "round_medians_ms": [
+            1.5234,
+            1.339,
+            1.3481,
+            1.323,
+            1.3249
+          ]
+        },
+        "ort:mixed_3": {
+          "median_ms": 1.3386,
+          "p05_ms": 1.3164,
+          "p95_ms": 1.8658,
+          "n": 500,
+          "round_medians_ms": [
+            1.3362,
+            1.3345,
+            1.3437,
+            1.3338,
+            1.3643
+          ]
+        }
+      }
+    },
+    "6": {
+      "threads": 6,
+      "pinned_cpus": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10
+      ],
+      "torch_threads": 6,
+      "models": {
+        "fp32": {
+          "median_ms": 8.027,
+          "p05_ms": 6.9398,
+          "p95_ms": 12.8067,
+          "n": 500,
+          "round_medians_ms": [
+            8.225,
+            7.7022,
+            8.412,
+            8.1058,
+            7.5496
+          ]
+        },
+        "fp32_fused": {
+          "median_ms": 6.1471,
+          "p05_ms": 5.6294,
+          "p95_ms": 10.9613,
+          "n": 500,
+          "round_medians_ms": [
+            6.0182,
+            7.1899,
+            6.5245,
+            6.0328,
+            5.9434
+          ]
+        },
+        "ptq": {
+          "median_ms": 3.3458,
+          "p05_ms": 3.0991,
+          "p95_ms": 6.4082,
+          "n": 500,
+          "round_medians_ms": [
+            3.4935,
+            3.1976,
+            3.5991,
+            3.2317,
+            3.2819
+          ]
+        },
+        "qat": {
+          "median_ms": 3.2953,
+          "p05_ms": 3.1109,
+          "p95_ms": 6.4971,
+          "n": 500,
+          "round_medians_ms": [
+            3.2895,
+            3.4476,
+            3.3951,
+            3.2347,
+            3.2429
+          ]
+        },
+        "mixed_3": {
+          "median_ms": 3.9493,
+          "p05_ms": 3.6969,
+          "p95_ms": 7.5203,
+          "n": 500,
+          "round_medians_ms": [
+            3.965,
+            4.1977,
+            3.8978,
+            3.9132,
+            3.9266
+          ]
+        },
+        "ort:fp32": {
+          "median_ms": 0.7454,
+          "p05_ms": 0.6618,
+          "p95_ms": 9.0846,
+          "n": 500,
+          "round_medians_ms": [
+            0.7088,
+            1.0768,
+            0.6711,
+            1.2013,
+            0.6738
+          ]
+        },
+        "ort:ptq": {
+          "median_ms": 0.6091,
+          "p05_ms": 0.5689,
+          "p95_ms": 4.6626,
+          "n": 500,
+          "round_medians_ms": [
+            0.5819,
+            0.5816,
+            1.3833,
+            0.5789,
+            1.3741
+          ]
+        },
+        "ort:qat": {
+          "median_ms": 0.593,
+          "p05_ms": 0.5689,
+          "p95_ms": 2.0343,
+          "n": 500,
+          "round_medians_ms": [
+            1.3834,
+            0.5946,
+            0.5833,
+            0.5819,
+            0.5797
+          ]
+        },
+        "ort:mixed_3": {
+          "median_ms": 0.5897,
+          "p05_ms": 0.5671,
+          "p95_ms": 3.1475,
+          "n": 500,
+          "round_medians_ms": [
+            0.5769,
+            0.5914,
+            0.5791,
+            1.383,
+            0.5827
+          ]
+        }
+      }
+    }
+  }
+}

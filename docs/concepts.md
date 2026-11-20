@@ -68,3 +68,49 @@ calibration-seed noise. The classic failure is reported for ImageNet MobileNetV2
 ReLU6. Our CIFAR model, trained with weight decay on the depthwise weights, never
 developed those outlier channels, so INT8 is mild here. Lower bit-widths (or analog
 noise) would bring the problem back, which is what steps 4–5 probe.
+
+## Checkpoint 2: QAT and sensitivity
+
+### Why QAT can recover accuracy
+PTQ rounds weights and activations *after* training, so the network never got a
+chance to adapt to the rounding. QAT inserts "fake quantization" into training:
+the forward pass rounds to the INT8 grid exactly as deployment will, while the
+backward pass treats the rounding as identity (the straight-through estimator).
+
+```
+forward:  w ──► round to INT8 grid ──► conv ──► round output ──► ...   (sees the real error)
+backward: gradient flows straight through the rounding as if it weren't there
+```
+The weights drift toward values that land well on the grid, and the learned
+activation ranges settle where clipping and rounding hurt least. BN statistics are
+frozen near the end so the folded weights stop moving, then the observers are frozen
+so the scales match the final weights.
+
+**What we measured:** QAT reached 93.44% against FP32's 93.31%. The control matters:
+the same 5 extra epochs *without* fake quantization, followed by PTQ, give 93.36%.
+PTQ lost only 0.21 points to begin with, so there was little for QAT to recover, and
+most of its edge is just extra training. QAT matters when PTQ loses a lot: lower
+bit-widths, or hardware with coarse ADCs.
+
+### What sensitivity analysis says to protect
+Quantize one layer at a time and measure how much the output moves (logit SQNR;
+lower = more damage):
+
+```
+most sensitive:  stem (38.5 dB) ─ blocks.0.dw (39.2) ─ blocks.6.project (41.5) ─ fc (41.6)
+most tolerant:   blocks.15.expand (63.8) ─ blocks.14.expand (60.8) ─ blocks.15.dw (60.6)
+```
+- **First layers.** The stem sees the raw image, and its error passes through every
+  later layer. Keeping the first and last layers at higher precision is the usual
+  first move on any accelerator.
+- **Narrow projections feeding residual adds** (no ReLU, signed outputs) are next.
+- **Late, wide layers** have redundancy to absorb rounding error.
+
+Keeping the top 3 in FP32 cost +0.05 MB and recovered most of PTQ's small loss
+(93.25%). On analog hardware the same ranking says which layers to map to
+digital/high-precision tiles, or to program with extra verify cycles.
+
+### Why INT8 QAT didn't help against weight noise
+INT8 rounding error has σ ≈ 0.23% of each layer's max weight. The simulated analog
+noise that hurts is 2–10%, about 9–44× larger. QAT only trained against the small
+one. To get noise robustness, inject noise of the target size during training.
