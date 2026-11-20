@@ -117,3 +117,7 @@ Set `PYTHONUTF8=1` on Windows; the ONNX exporter and the report print non-ASCII 
 ## Concepts
 
 Plain-language notes on scale and zero-point, calibration, fusion, depthwise convs, QAT and sensitivity: [`docs/concepts.md`](docs/concepts.md).
+
+## License
+
+Code, results and figures are released under the [MIT License](LICENSE). CIFAR-10 is not included in this repository; `scripts/download_data.py` fetches it from its original source.
