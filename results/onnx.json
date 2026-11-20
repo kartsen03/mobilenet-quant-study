@@ -1,0 +1,132 @@
+{
+  "env": {
+    "timestamp": "2026-11-19T19:26:13-05:00",
+    "os": "Windows-10-10.0.26300-SP0",
+    "python": "3.11.9",
+    "numpy": "2.4.6",
+    "torch": "2.14.1+cu130",
+    "torch_cuda": "13.0",
+    "cudnn": 92400,
+    "cuda_available": true,
+    "quantized_engines": [
+      "onednn"
+    ],
+    "quantized_engine": "onednn",
+    "torch_threads": 14,
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700H",
+    "logical_cpus": 20,
+    "performance_cpus": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "driver": "592.00",
+      "memory": "6144 MiB"
+    },
+    "power_plan": "Turbo",
+    "git": {
+      "commit": "e4733db7f9d05331804616424ebd774debeb7a9b",
+      "code_dirty": false
+    },
+    "torchvision": "0.29.1+cu130",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.32.0",
+    "onnxscript": "0.7.2",
+    "git_at_write": {
+      "commit": "e4733db7f9d05331804616424ebd774debeb7a9b",
+      "code_dirty": false
+    }
+  },
+  "note": "Step 6: export to ONNX and verify ONNX Runtime (CPU) against PyTorch.\n\n- FP32: torch.onnx.export with the dynamo exporter (opset 18), from the trained\n  (unfused) model; ORT folds BN itself.\n- INT8 (PTQ, QAT, mixed precision): the TorchScript exporter (dynamo=False, opset\n  17) writes the eager INT8 model as QDQ ONNX (QuantizeLinear/DequantizeLinear\n  around float ops, carrying PyTorch's exact scales and zero-points). With full\n  graph optimization ORT fuses those patterns into QLinearConv/QLinearAdd/QGemm,\n  i.e. real INT8 kernels (MLAS), not float emulation.\n\nVerification on all 10,000 test images (batch 1):\n- FP32 tolerance: max |logit diff| <= 1e-4 (float reassociation only).\n- INT8 tolerance: max |logit diff| <= 5 output quantization steps (fc output\n  scale), and predictions may differ on at most 0.1% of images. PyTorch (oneDNN)\n  and ORT (MLAS) round intermediate requantizations independently, so bit-exact\n  equality is not expected. The threshold was set after a 256-image probe of the\n  PTQ model (observed max 0.63 logits ~ 3 steps).",
+  "ort_providers": [
+    "CPUExecutionProvider"
+  ],
+  "models": {
+    "fp32": {
+      "onnx_bytes": 9087363,
+      "ort_test_acc": 0.9331,
+      "torch_test_acc": 0.9331,
+      "max_abs_diff": 1.1444091796875e-05,
+      "mean_abs_diff": 1.1143398523927317e-06,
+      "pred_mismatch": 0,
+      "tolerance": "max_abs_diff <= 1e-4",
+      "pass": true,
+      "ort_optimized_ops": {
+        "FusedConv": 35,
+        "Conv": 17,
+        "Add": 10,
+        "ReduceMean": 1,
+        "Reshape": 1,
+        "Gemm": 1
+      }
+    },
+    "ptq": {
+      "onnx_bytes": 2582196,
+      "ort_test_acc": 0.9325,
+      "torch_test_acc": 0.931,
+      "max_abs_diff": 0.6282072067260742,
+      "mean_abs_diff": 0.06535394489765167,
+      "pred_mismatch": 35,
+      "output_quant_step": 0.15705175697803497,
+      "max_diff_in_steps": 4.0,
+      "tolerance": "max_abs_diff <= 5 output steps and pred_mismatch <= 10",
+      "pass": false,
+      "ort_optimized_ops": {
+        "QLinearConv": 52,
+        "QLinearAdd": 10,
+        "QuantizeLinear": 1,
+        "QLinearGlobalAveragePool": 1,
+        "Flatten": 1,
+        "QGemm": 1,
+        "DequantizeLinear": 1
+      }
+    },
+    "qat": {
+      "onnx_bytes": 2582196,
+      "ort_test_acc": 0.933,
+      "torch_test_acc": 0.9344,
+      "max_abs_diff": 1.098729133605957,
+      "mean_abs_diff": 0.1044740229845047,
+      "pred_mismatch": 49,
+      "output_quant_step": 0.13734112679958344,
+      "max_diff_in_steps": 8.0,
+      "tolerance": "max_abs_diff <= 5 output steps and pred_mismatch <= 10",
+      "pass": false,
+      "ort_optimized_ops": {
+        "QLinearConv": 52,
+        "QLinearAdd": 10,
+        "QuantizeLinear": 1,
+        "QLinearGlobalAveragePool": 1,
+        "Flatten": 1,
+        "QGemm": 1,
+        "DequantizeLinear": 1
+      }
+    },
+    "mixed_3": {
+      "onnx_bytes": 2618077,
+      "ort_test_acc": 0.9321,
+      "torch_test_acc": 0.9325,
+      "max_abs_diff": 1.0993623733520508,
+      "mean_abs_diff": 0.10154024511575699,
+      "pred_mismatch": 75,
+      "output_quant_step": 0.15705175697803497,
+      "max_diff_in_steps": 7.0,
+      "tolerance": "max_abs_diff <= 5 output steps and pred_mismatch <= 10",
+      "pass": false,
+      "ort_optimized_ops": {
+        "QLinearConv": 52,
+        "QLinearAdd": 10,
+        "QuantizeLinear": 1,
+        "QLinearGlobalAveragePool": 1,
+        "Flatten": 1,
+        "QGemm": 1,
+        "DequantizeLinear": 1
+      }
+    }
+  }
+}
